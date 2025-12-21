@@ -9,6 +9,7 @@ import 'package:xall_call/features/auth/presentation/bloc/auth_state.dart';
 import 'package:xall_call/features/auth/presentation/pages/home_page.dart';
 import 'package:xall_call/features/auth/presentation/pages/signin_page.dart';
 import 'package:xall_call/features/auth/presentation/pages/signup_page.dart';
+import 'package:xall_call/features/call/presentation/pages/call_screen.dart';
 import 'package:xall_call/injection_container.dart';
 
 void main() async {
@@ -64,6 +65,12 @@ class MyApp extends StatelessWidget {
           '/signin': (context) => const SignInPage(),
           '/signup': (context) => const SignUpPage(),
           '/home': (context) => const HomePage(),
+          '/call': (context) {
+            final callData =
+                ModalRoute.of(context)!.settings.arguments
+                    as Map<String, dynamic>;
+            return CallScreen(callData: callData);
+          },
         },
       ),
     );
