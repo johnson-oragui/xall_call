@@ -55,7 +55,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
       final Map<String, dynamic> responseData = json.decode(response.body);
       switch (response.statusCode) {
-        case 200:
+        case 200 || 201:
           final Map<String, dynamic> userData = responseData['data'];
           userData['token'] = responseData['data']['tokens']['auth'];
 
@@ -68,7 +68,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
             email: userModel.email,
             id: userModel.id,
             username: userModel.username,
+            token: userData['token'],
           );
+          // debugPrint('datasource signin userEntity: $userEntity');
           _storeUser(userModel);
           debugPrint('signin responseData: $responseData');
 
